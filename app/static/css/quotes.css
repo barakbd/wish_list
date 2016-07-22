@@ -1,0 +1,14 @@
+* {
+  font-family: monaco;
+}
+
+body{
+    padding: 20px;
+}
+
+.warning{
+  color: red;
+}
+.success{
+  color: green;
+}

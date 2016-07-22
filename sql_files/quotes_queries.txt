@@ -1,0 +1,45 @@
+Password: Mnbvcxz!1
+
+
+Create User:
+INSERT INTO `quotes`.`users` (`first_name`, `last_name`, `email`, `pw_hash`, `updated_at`, `created_at`) VALUES ('Donald', 'Duck', 'donald@duck.com', 'Mnbvcxz!1', 'NOW()', 'NOW()');
+
+Insert Quote:
+INSERT INTO `quotes`.`quotes` (`quote_id`, `quoted_by`, `quote_text`, `users_user_id`, `created_at`, `updated_at`) VALUES ('', 'Ninja Turtles', 'Kawabanga', '3', NOW(), NOW());
+
+
+Insert Favourites
+INSERT INTO `quotes`.`favourites` (`quotes_quote_id`, `users_user_id`, `created_at`) VALUES ('2', '3', '2016-07-20 09:40:55');
+
+select single users quotes:
+SELECT * FROM quotes WHERE users_user_id=1;
+
+select favourties list for logged in user:
+SELECT favourites.users_user_id, favourites.quotes_quote_id, quotes.quote_id, quotes.quoted_by, quotes.quote_text, quotes.users_user_id, quotes.created_at, quotes.updated_at, users.user_id, users.first_name, users.last_name
+FROM favourites
+LEFT JOIN quotes
+ON quotes_quote_id = quote_id
+LEFT JOIN users
+ON quotes.users_user_id = users.user_id
+WHERE favourites.users_user_id = 2;
+
+select all quotes with users ordered by date excluding favourites:
+SELECT quotes.quote_id, quotes.quoted_by, quotes.quote_text, quotes.users_user_id, quotes.created_at, quotes.updated_at, users.user_id, users.first_name, users.last_name 
+FROM quotes 
+LEFT JOIN users
+ON quotes.users_user_id = users.user_id
+WHERE quotes.quote_id NOT IN
+(SELECT quotes_quote_id FROM favourites
+WHERE favourites.users_user_id = 3)
+ORDER BY created_at DESC;
+
+
+
+
+
+select all Quotes with users order by date laetst on top:
+SELECT quotes.quote_id, quotes.quoted_by, quotes.quote_text, quotes.users_user_id, quotes.created_at, quotes.updated_at, users.user_id, users.first_name, users.last_name 
+FROM quotes 
+LEFT JOIN users
+ON quotes.users_user_id = users.user_id
+ORDER BY created_at DESC;

@@ -1,0 +1,39 @@
+* {
+  font-family: monaco;
+}
+
+body{
+    padding: 20px;
+}
+li{
+  list-style-type: none;
+  margin: 20px 0;
+}
+
+.btn{
+    margin: 20px 0;
+}
+
+.warning{
+  color: red;
+}
+.success{
+  color: green;
+}
+
+/****************** THE_WALL ***************************/
+nav *{
+  display: inline-block;
+}
+
+section{
+  border: 2px solid blue;
+  margin: 20px;
+}
+
+.reset_password_form{
+  margin: 20px 0;
+  /*visibility: hidden;*/
+}* {
+  font-family: monaco;
+}
