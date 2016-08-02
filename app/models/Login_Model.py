@@ -49,7 +49,8 @@ class Login_Model(Model):
     ################## VIEW USER ##################################
     def view_user(self, user_id):
         data_view_user = {'user_id': user_id}
-        query_view_user = 'SELECT * FROM quotes WHERE users_user_id = :user_id;'
+        # query_view_user = 'SELECT * FROM quotes LEFT JOIN users on users_user_id=user_id WHERE users_user_id = :user_id;'
+        query_view_user = 'SELECT *, (SELECT COUNT(quote_id) FROM quotes WHERE users_user_id = :user_id) AS quote_count FROM quotes LEFT JOIN users on users_user_id=user_id WHERE users_user_id = :user_id;'
         user_quotes = self.db.query_db(query_view_user, data_view_user)
         print 'Users quotes are ', user_quotes, '\n'
         return user_quotes

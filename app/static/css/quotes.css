@@ -12,3 +12,7 @@ body{
 .success{
   color: green;
 }
+
+.quoted_by{
+    color: red;
+}

@@ -31,18 +31,19 @@
 
     <div class='container'>
 
-        <h2>Posted by {{ user_quotes[0]['user_id'] }} </h2>
+        <h2>Posted by: {{ user_quotes[0]['first_name'] }} {{ user_quotes[0]['last_name'] }} </h2>
+        <h2>Count: {{ user_quotes[0]['quote_count'] }} </h2>
         {% for quote in user_quotes %}
         <div class='well'>
-            <p>
-                Quoted By: {{ user_quotes['quoted_by'] }}
+            <p class='quoted_by'>
+                Quoted By: {{ quote['quoted_by'] }}
             </p>
             <p>
-                Quote says: {{ user_quotes['quote_text'] }}
+                Quote says: {{ quote['quote_text'] }}
             </p>
         </div>
         {% endfor %}
-        
+
     </div>
     <!-- End container -->
 

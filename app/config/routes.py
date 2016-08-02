@@ -17,6 +17,8 @@ routes['POST']['/quotes/add_submit'] = 'Quotes#add_quote_submit'
 
 routes['GET']['/quotes/mark_fav/<int:quote_id>'] = 'Quotes#mark_fav'
 
+routes['GET']['/quotes/remove_fav/<int:quote_id>'] = 'Quotes#remove_fav'
+
 routes['GET']['/users/<user_id>'] = 'Logins#view_user'
 
 

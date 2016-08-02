@@ -22,6 +22,7 @@ class Registrations(Controller):
         ###################### SESSION FOR TESTING #################################
         session['first_name'] = request.form['first_name']
         session['last_name'] = request.form['last_name']
+        session['birthday'] = request.form['birthday']
         session['email'] = request.form['email']
         session['password'] = request.form['password']
         session['password_verify'] = request.form['password_verify']

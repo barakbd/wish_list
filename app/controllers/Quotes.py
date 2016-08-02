@@ -45,3 +45,11 @@ class Quotes(Controller):
         flash ('Quote added to your list')
         print 'flash messages are ', session['_flashes'], '\n'
         return redirect('/quotes')
+
+    ######################## REMOVE FAV #############################################
+    def remove_fav(self, quote_id):
+        print 'Quotes - remove_fav ','\n'
+        remove_fav_quote = self.models['Quote_Model'].remove_fav_quote(quote_id, session)
+        flash ('Quote Removed from your list')
+        print 'flash messages are ', session['_flashes'], '\n'
+        return redirect('/quotes')

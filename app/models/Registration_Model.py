@@ -1,16 +1,20 @@
 from system.core.model import Model
+from datetime import datetime
 import re
+
 
 class Registration_Model(Model):
     def __init__(self):
         super(Registration_Model, self).__init__()
-        self.EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9\.\+_-]+@[a-zA-Z0-9\._-]+\.[a-zA-Z]*$')
-
+        self.EMAIL_REGEX = re.compile(r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)")
+        # http://emailregex.com/
+        
     def register_fields_validation(self, form):
         print 'Registration_Model'
 
         first_name = form['first_name']
         last_name = form['last_name']
+        birthday = form['birthday']
         email = form['email']
         password = form['password']
         password_verify = form['password_verify']
@@ -33,13 +37,24 @@ class Registration_Model(Model):
 
         if not last_name.isalpha() or len(last_name)<3:
             errors.append('Last Name - use only alphabet letters, 2 letters minimum')
-        # try:
-        #     datetime.strptime(birthday, '%m/%d/%Y')
-        #     if datetime.strptime(birthday, '%m/%d/%Y') > datetime.today():
-        #         flash("Can't put date in future")
-        #
-        # except ValueError:
-        #     flash('Wrong date format', 'birthday')
+        ###################### CHECK BIRTHDAY #################################
+
+
+        try:
+            datetime.strptime(birthday, '%m/%d/%Y')
+            if datetime.strptime(birthday, '%m/%d/%Y') > datetime.today():
+                errors.append("Birthday can't be the furture")
+        except ValueError:
+            # raise ValueError('Incorrect date format')
+            errors.append('Enter birthday in format mm/dd/yyyy')
+
+        # if not isinstance(birthday, datetime):
+        #     errors.append('Enter birthday in format mm-dd-yyyy')
+        # else:
+        #     if not datetime.strptime(birthday, '%m/%d/%Y'):
+        #         errors.append('Wrong date format. Use mm-dd-yyyy')
+        #     elif datetime.strptime(birthday, '%m/%d/%Y') > datetime.today():
+        #         errors.append("Can't put date in future")
 
         ###################### CHECK EMAIL FORMAT #################################
         if not self.EMAIL_REGEX.match(email):

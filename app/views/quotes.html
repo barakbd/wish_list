@@ -30,6 +30,8 @@
     </nav>
 
     <div class='container'>
+
+        <!-- LEFT COLUMN -->
         <div class='row'>
             <div class='col-lg-7'>
                 {% for quote in all_quotes %}
@@ -41,7 +43,7 @@
                         Quote Says: {{ quote['quote_text'] }}
                     </p>
                     <p>
-                        Added By: <a href='/users/{{ quote['user_id']}}' >{{ quote['first_name'] }}</a>
+                        Added By: <a href='/users/{{ quote['user_id']}}'>{{ quote['first_name'] }}</a>
                     </p>
                     <p>
                         <a href='/quotes/mark_fav/{{ quote['quote_id'] }}'> Add to my list </a>
@@ -50,8 +52,12 @@
                 {% endfor %}
             </div>
             <!-- END col-lg-7 -->
+            <!-- END LEFT COLUMN -->
 
+
+            <!-- RIGHT COLUMN -->
             <div class='col-lg-4 col-lg-offset-1'>
+                <!-- FAVOURITES -->
                 <div class='row'>
                     <div class='well scrollable-menu'>
                         {% for fav_quote in fav_quotes %}
@@ -65,12 +71,15 @@
                             <p>
                                 Added By: {{ fav_quote['first_name'] }}
                             </p>
+                            <p>
+                                <a href='/quotes/remove_fav/{{ fav_quote['quote_id'] }}'><button>Remove from my list</button></a>
+                            </p>
                         </div>
                         {% endfor %}
                     </div>
                 </div>
-                <!-- END ROW 1 - FAVS -->
-
+                <!-- END ROW 1 - FAVOURITES -->
+                <!-- ADD QUOTE FORM -->
                 <div class='row'>
                     <h2>Contribute a Quote</h2>
                     <form class="form-horizontal" role="form" action='/quotes/add_submit' method='post'>
@@ -99,9 +108,9 @@
                         <!-- END SUBMIT -->
                     </form>
                 </div>
-                <!-- END ROW 2 -->
+                <!-- END ROW 2 - ADD QUOTE FORM -->
             </div>
-            <!-- END RIGHT COL LG-4 -->
+            <!-- END RIGHT COLUMN LG-4 -->
         </div>
         <!-- END MAIN ROW -->
     </div>

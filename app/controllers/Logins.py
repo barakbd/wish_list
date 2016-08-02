@@ -8,6 +8,12 @@ class Logins(Controller):
         self.db = self._app.db
 
     def login(self):
+
+        ###################### SESSION FOR TESTING #################################
+        session['login_email'] = request.form['login_email']
+        session['login_password'] = request.form['login_password']
+        ###################### END SESSION FOR TESTING #################################
+
         login_status = self.models['Login_Model'].login(request.form)
         if login_status['status'] == False:
             for message in login_status['errors']:
@@ -22,13 +28,13 @@ class Logins(Controller):
 
             return redirect ('/')
 
+    ######################## RESET #############################################
+    def reset_password_submit(self):
+        return redirect('/')
+
     ######################## SHOW USER PAGE AND QUOTES #############################################
 
     def view_user(self, user_id):
         print 'Logins - view_user ','\n'
         user_quotes = self.models['Login_Model'].view_user(user_id)
         return self.load_view('view_user.html', user_quotes=user_quotes)
-
-    ######################## RESET #############################################
-    def reset_password_submit(self):
-        return redirect('/')
