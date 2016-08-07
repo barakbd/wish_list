@@ -12,7 +12,7 @@ class Registrations(Controller):
         # session.clear()
         key_exists=session.get('user_id')
         if key_exists:
-            return redirect ('/quotes')
+            return redirect ('/items')
         else:
             return self.load_view('index.html')
 

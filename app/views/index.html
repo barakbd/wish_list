@@ -7,161 +7,164 @@
     <meta name='description' content='Full app using Pylot MVC' />
     <meta name='keywords' content='Pylot, forms, database, mySQL, routing' />
 
-    <link rel='stylesheet' type='text/css' href="/static/css/index.css" />
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel='stylesheet' type='text/css' href="/static/css/index.css" />
 
-    <script type='text/javascript' src="/static/js/script.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
-
+    <script type='text/javascript' src="/static/js/script.js"></script>
+s
 </head>
 
 <body>
     <div class='container'>
 
         <div class='row'>
-            <!-- Register -->
-            <div class='col-lg-6 well'>
+            <!-- ROW for Register and Login -->
+            <div class='row'>
+                <!-- Register -->
+                <div class='col-lg-6 well'>
 
-                <fieldset>
-                    <legend class='col-sm-9 col-sm-offset-3'>Register</legend>
-                    <form action='/register' id='register' method='post' class="form-horizontal" role="form">
+                    <fieldset>
+                        <legend class='col-sm-9 col-sm-offset-3'>Register</legend>
+                        <form action='/register' id='register' method='post' class="form-horizontal" role="form">
 
-                        <div class="form-group">
-                            <label class="control-label col-sm-3" for="first_name">First Name:</label>
-                            <div class="col-sm-9">
-                                <input type="text" name='first_name' class="form-control" id="first_name" placeholder="First Name" value='{{ session['first_name'] }}'>
+                            <div class="form-group">
+                                <label class="control-label col-sm-3" for="first_name">First Name:</label>
+                                <div class="col-sm-9">
+                                    <input type="text" name='first_name' class="form-control" id="first_name" placeholder="First Name" value='{{ session['first_name'] }}'>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="form-group">
-                            <label class="control-label col-sm-3" for="last_name">Last Name:</label>
-                            <div class="col-sm-9">
-                                <input type="text" name='last_name' class="form-control" id="last_name" placeholder="Last Name" value='{{ session['last_name'] }}'>
+                            <div class="form-group">
+                                <label class="control-label col-sm-3" for="last_name">Last Name:</label>
+                                <div class="col-sm-9">
+                                    <input type="text" name='last_name' class="form-control" id="last_name" placeholder="Last Name" value='{{ session['last_name'] }}'>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="form-group">
-                            <label class="control-label col-sm-3" for="birthday">Birthday:</label>
-                            <div class="col-sm-9">
-                                <input type="text" name='birthday' class="form-control" id="birthday" placeholder="format: mm/dd/yyyy" value='{{ session['birthday'] }}'>
+                            <div class="form-group">
+                                <label class="control-label col-sm-3" for="birthday">Birthday:</label>
+                                <div class="col-sm-9">
+                                    <input type="text" name='birthday' class="form-control" id="birthday" placeholder="format: mm/dd/yyyy" value='{{ session['birthday'] }}'>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="form-group">
-                            <label class="control-label col-sm-3" for="email">Email:</label>
-                            <div class="col-sm-9">
-                                <input type="text" name='email' class="form-control" id="email" placeholder="format: user@domain.com" value='{{ session['email'] }}'>
+                            <div class="form-group">
+                                <label class="control-label col-sm-3" for="email">Email:</label>
+                                <div class="col-sm-9">
+                                    <input type="text" name='email' class="form-control" id="email" placeholder="format: user@domain.com" value='{{ session['email'] }}'>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="form-group">
-                            <label class="control-label col-sm-3" for="password">Password:</label>
-                            <div class="col-sm-9">
-                                <input type="text" name='password' class="form-control" id="password" placeholder="Password should be at leat 8 charachters, and contain at least 1 uppercase letter, 1 number and 1 symbol" title='Password should be at leat 8 charachters, and contain at least 1 uppercase letter, 1 number and 1 symbol' value='{{ session['password'] }}'>
+                            <div class="form-group">
+                                <label class="control-label col-sm-3" for="password">Password:</label>
+                                <div class="col-sm-9">
+                                    <input type="text" name='password' class="form-control" id="password" placeholder="Password should be at leat 8 charachters, and contain at least 1 uppercase letter, 1 number and 1 symbol" title='Password should be at leat 8 charachters, and contain at least 1 uppercase letter, 1 number and 1 symbol'
+                                        value='{{ session['password'] }}'>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="form-group">
-                            <label class="control-label col-sm-3" for="password_verify">Repeat Password:</label>
-                            <div class="col-sm-9">
-                                <input type="text" name='password_verify' class="form-control" id="password_verify" placeholder="Passwords should matchs" title='Password should match' value='{{ session['password_verify'] }}'>
+                            <div class="form-group">
+                                <label class="control-label col-sm-3" for="password_verify">Repeat Password:</label>
+                                <div class="col-sm-9">
+                                    <input type="text" name='password_verify' class="form-control" id="password_verify" placeholder="Passwords should matchs" title='Password should match' value='{{ session['password_verify'] }}'>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="col-sm-9 col-sm-offset-3 warning">
-                            {% with messages = get_flashed_messages(category_filter=['register_error']) %} {% for message in messages %}
-                            <p>
-                                {{ message }}
-                            </p>
-                            {% endfor%} {% endwith %}
-                        </div>
-                        <!-- <div class="form-group">
+                            <div class="col-sm-9 col-sm-offset-3 warning">
+                                {% with messages = get_flashed_messages(category_filter=['register_error']) %} {% for message in messages %}
+                                <p>
+                                    {{ message }}
+                                </p>
+                                {% endfor%} {% endwith %}
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-offset-3 col-sm-9">
+                                    <button type="submit" class="btn btn-success">Register</button>
+                                </div>
+                            </div>
+
+                        </form>
+                    </fieldset>
+                </div>
+                <!-- END Register -->
+
+                <!-- Login -->
+                <div class='col-lg-5 col-lg-offset-1 well'>
+
+                    <fieldset>
+                        <legend class='col-sm-9 col-sm-offset-3'>Login</legend>
+                        <form action='/login' id='login' method='post' class="form-horizontal" role="form">
+
+                            <div class="form-group">
+                                <label class="control-label col-sm-3" for="login_email">Email:</label>
+                                <div class="col-sm-9">
+                                    <input type="email" name='login_email' class="form-control" id="login_email" placeholder="format: user@domain.com" value='{{ session['login_email'] }}'>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-sm-3" for="login_password">Password:</label>
+                                <div class="col-sm-9">
+                                    <input type="text" name='login_password' class="form-control" id="login_password" placeholder="Password should be at leat 8 charachters, and contain at least 1 uppercase letter, 1 number and 1 symbol" title='Password should be at leat 8 charachters, and contain at least 1 uppercase letter, 1 number and 1 symbol'
+                                        value='{{ session['login_password'] }}'>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-9 col-sm-offset-3 warning">
+                                {% with messages = get_flashed_messages(category_filter=['login_error']) %} {% for message in messages %}
+                                <p>
+                                    {{ message }}
+                                </p>
+                                {% endfor%} {% endwith %}
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-offset-3 col-sm-9">
+                                    <button type="submit" class="btn btn-primary">Login</button>
+                                </div>
+                            </div>
+                        </form>
+
+
+                    </fieldset>
+
+
+
+
+                    <!-- Password Reset -->
+                    <div class='row'>
                         <div class="col-sm-offset-3 col-sm-9">
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox"> Remember me</label>
-                            </div>
+                            <button id='reset_password_button' class='btn btn-warning'> Reset Password</button>
                         </div>
-                    </div> -->
-
-                        <div class="form-group">
-                            <div class="col-sm-offset-3 col-sm-9">
-                                <button type="submit" class="btn btn-success">Register</button>
-                            </div>
-                        </div>
-
-                    </form>
-                </fieldset>
-            </div>
-            <!-- END Register -->
-
-            <!-- Login -->
-            <div class='col-lg-5 col-lg-offset-1 well'>
-
-                <fieldset>
-                    <legend class='col-sm-9 col-sm-offset-3'>Login</legend>
-                    <form action='/login' id='login' method='post' class="form-horizontal" role="form">
-
-                        <div class="form-group">
-                            <label class="control-label col-sm-3" for="login_email">Email:</label>
-                            <div class="col-sm-9">
-                                <input type="email" name='login_email' class="form-control" id="login_email" placeholder="format: user@domain.com" value='{{ session['login_email'] }}'>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="control-label col-sm-3" for="login_password">Password:</label>
-                            <div class="col-sm-9">
-                                <input type="text" name='login_password' class="form-control" id="login_password" placeholder="Password should be at leat 8 charachters, and contain at least 1 uppercase letter, 1 number and 1 symbol" title='Password should be at leat 8 charachters, and contain at least 1 uppercase letter, 1 number and 1 symbol' value='{{ session['login_password'] }}'>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-9 col-sm-offset-3 warning">
-                            {% with messages = get_flashed_messages(category_filter=['login_error']) %} {% for message in messages %}
-                            <p>
-                                {{ message }}
-                            </p>
-                            {% endfor%} {% endwith %}
-                        </div>
-                        <!-- <div class="form-group">
-                        <div class="col-sm-offset-3 col-sm-9">
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox"> Remember me</label>
-                            </div>
-                        </div>
-                    </div> -->
-
-                        <div class="form-group">
-                            <div class="col-sm-offset-3 col-sm-9">
-                                <button type="submit" class="btn btn-primary">Login</button>
-                            </div>
-                        </div>
-                    </form>
-
-
-                </fieldset>
-
-                <!-- Password Reset -->
-                <div class='row' id='reset_password'>
-                    <div class="col-sm-offset-3 col-sm-9">
-                        <button class='btn btn-warning'> Reset Password</button>
                     </div>
 
-                        <form action='/reset_password' method='post' class="form-horizontal" role="form" id='reset_password_form'>
+
+                    <fieldset id='reset_password_form' class='well'>
+                        <legend class='col-sm-9 col-sm-offset-3'>Reset</legend>
+                        <form action='/reset_password' id='reset_password' method='post' class="form-horizontal" role="form">
 
                             <div class="form-group">
-                                <label class="control-label col-sm-3" for="email_reset">Email:</label>
+                                <label class="control-label col-sm-3" for="login_email">Email:</label>
                                 <div class="col-sm-9">
-                                    <input type="email" name='email_reset' class="form-control" id="email_reset" placeholder="format: user@domain.com">
+                                    <input type="email" name='login_email' class="form-control" id="login_email" placeholder="format: user@domain.com" value='{{ session['login_email'] }}'>
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label class="control-label col-sm-3" for="password_reset">New Password:</label>
+                                <label class="control-label col-sm-3" for="new_password">New Password:</label>
                                 <div class="col-sm-9">
-                                    <input type="email" name='password_reset' class="form-control" id="password_reset" placeholder="format: user@domain.com">
+                                    <input type="text" name='new_password' class="form-control" id="new_password" placeholder="format: user@domain.com">
                                 </div>
+                            </div>
+
+                            <div class="col-sm-9 col-sm-offset-3 warning">
+                                {% with messages = get_flashed_messages(category_filter=['reset_password_error']) %} {% for message in messages %}
+                                <p>
+                                    {{ message }}
+                                </p>
+                                {% endfor%} {% endwith %}
                             </div>
 
                             <div class="form-group">
@@ -171,26 +174,32 @@
                             </div>
 
                         </form>
+                    </fieldset>
+                    <!-- END Password Reset -->
 
                 </div>
-                <!-- End reset_password div Row -->
+                <!-- END Login col-lg-5 col -->
             </div>
-            <!-- END Login col-lg-5 col -->
+            <!-- END row for register and login -->
 
 
-        </div>
-        <!-- End Row -->
-
-        <div class='row well'>
-            <a href='/clear_session'>
-                <button>Clear Session</button>
-            </a>
+            <div class='row well'>
+                <a href='/clear_session'>
+                    <button>Clear Session</button>
+                </a>
+            </div>
 
         </div>
-
+        <!-- End Main Row -->
     </div>
     <!-- END Container -->
-
+    <script>
+        $(function() {
+            $('#reset_password_button').click(function() {
+                $('#reset_password_form').toggle();
+            });
+        });
+    </script>
 </body>
 
 </html>

@@ -30,3 +30,6 @@ section{
   border: 2px solid blue;
   margin: 20px;
 }
+#reset_password_form{
+    display: none;
+}

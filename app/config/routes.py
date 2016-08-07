@@ -11,15 +11,22 @@ routes['POST']['/reset_password'] = 'Logins#reset_password_submit'
 
 routes['GET']['/clear_session'] = 'Registrations#clear_session'
 
-routes['GET']['/quotes'] = 'Quotes#index'
+############## Items ###############
 
-routes['POST']['/quotes/add_submit'] = 'Quotes#add_quote_submit'
+routes['GET']['/items'] = 'Items#index'
 
-routes['GET']['/quotes/mark_fav/<int:quote_id>'] = 'Quotes#mark_fav'
+routes['GET']['/items/add_item_page'] = 'Items#add_item_page'
 
-routes['GET']['/quotes/remove_fav/<int:quote_id>'] = 'Quotes#remove_fav'
+routes['POST']['/items/add_item_submit'] = 'Items#add_item_submit'
 
-routes['GET']['/users/<user_id>'] = 'Logins#view_user'
+routes['GET']['/items/mark_wish_list/<int:item_id>'] = 'Items#mark_wish_list'
+
+routes['GET']['/items/delete_item/<int:item_id>'] = 'Items#delete_item'
+
+routes['GET']['/items/remove_wish_list/<int:item_id>'] = 'Items#remove_wish_list'
+
+routes['GET']['/items/view_item/<int:item_id>'] = 'Items#view_item'
+
 
 
 

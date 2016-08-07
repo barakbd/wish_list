@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>items Home</title>
+    <meta charset='UTF-8' />
+    <meta name='description' content='Full app using Pylot MVC' />
+    <meta name='keywords' content='Pylot, forms, database, mySQL, routing' />
+
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel='stylesheet' type='text/css' href="/static/css/items.css" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+    <script type='text/javascript' src="/static/js/script.js"></script>
+
+
+</head>
+
+<body>
+    <div class='container'>
+
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">Welcome {{ session['first_name'] }}</a>
+                </div>
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="#">Home</a></li>
+                    <li><a href="/items/add_item_page">Add New Item</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href='/clear_session'><span class="glyphicon glyphicon-log-out"></span>Logout</a>></li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- WISH LIST ITEMS -->
+        <div class='container'>
+
+            <h2>My wish list</h2>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>ITEM</th>
+                        <th>ADDED BY</th>
+                        <th>DATE ADDED</th>
+                        <th>ACTION</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for item in wish_list_items %}
+                    <tr>
+                        <td><a href='/items/view_item/{{ item['item_id'] }}'>{{ item['item_name'] }}</td>
+                        <td>{{ item['first_name'] }}</td>
+                        <td>{{ item['created_at'] }}</td>
+                        <td>
+                            {% if item['user_id'] == session['user_id'] %}
+                            <a href='/items/delete_item/{{ item['item_id'] }}'>Delete</a>
+                            {% else %}
+                            <a href='/items/remove_wish_list/{{ item['item_id'] }}'>Remove from wish list</a>
+                            {% endif %}
+                        </td>
+
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <!-- END WISH LIST CONTAINER -->
+
+
+        <!-- ALL ITEMS -->
+        <div class='container'>
+
+            <h2>Other users wish list</h2>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>ITEM</th>
+                        <th>ADDED BY</th>
+                        <th>DATE ADDED</th>
+                        <th>ACTION</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for item in all_items %}
+                    <tr>
+                        <td><a href='/items/view_item/{{ item['item_id'] }}'>{{ item['item_name'] }}</a></td>
+                        <td>{{ item['first_name'] }}</td>
+                        <td>{{ item['created_at'] }}</td>
+                        <td><a href='/items/mark_wish_list/{{ item['item_id'] }}'>Add to my wish list</a></td>
+                        {% endfor %}
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <!-- END ALL ITEMS CONTAINER -->
+
+</body>
+
+</html>

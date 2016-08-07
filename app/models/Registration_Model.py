@@ -8,7 +8,7 @@ class Registration_Model(Model):
         super(Registration_Model, self).__init__()
         self.EMAIL_REGEX = re.compile(r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)")
         # http://emailregex.com/
-        
+
     def register_fields_validation(self, form):
         print 'Registration_Model'
 
@@ -33,10 +33,10 @@ class Registration_Model(Model):
         ###################### CHECK NAMES #################################
 
         if not first_name.isalpha() or len(first_name)<3:
-            errors.append('First Name - use only alphabet letters, 2 letters minimum')
+            errors.append('First Name - use only alphabet letters, 3 letters minimum')
 
         if not last_name.isalpha() or len(last_name)<3:
-            errors.append('Last Name - use only alphabet letters, 2 letters minimum')
+            errors.append('Last Name - use only alphabet letters, 3 letters minimum')
         ###################### CHECK BIRTHDAY #################################
 
 
@@ -86,7 +86,7 @@ class Registration_Model(Model):
                             'email': email,
                             'pw_hash': pw_hash
                             }
-            query_insert_new_user = 'INSERT INTO users (first_name, last_name, email, pw_hash, created_at, updated_at) Values (:first_name, :last_name, :email, :pw_hash, NOW(), NOW())'
+            query_insert_new_user = 'INSERT INTO users (first_name, last_name, email, pw_hash, created_at, updated_at) VALUES (:first_name, :last_name, :email, :pw_hash, NOW(), NOW())'
             new_user_id = self.db.query_db(query_insert_new_user, data_registered)
             print 'New user id is ', new_user_id,'\n'
 

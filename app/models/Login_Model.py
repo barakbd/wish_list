@@ -45,6 +45,37 @@ class Login_Model(Model):
             return{'status': True, 'user_details': login_verification}
             print 'Login success','\n'
 
+    ################## RESET PASSWORD ##################################
+    def reset_password_submit(self, form):
+        errors=[]
+        new_password = form['new_password']
+
+        if not new_password:
+            errors.append('Password must be more than 8 characters, contain 1 uppercase letter and a mixture of numbers and letters')
+            return {'status': False, 'errors':errors}
+        if len(new_password)<8 or new_password.islower() or new_password.isdigit() or new_password.isalpha():
+            errors.append('Password must be more than 8 characters, contain 1 uppercase letter and a mixture of numbers and letters')
+            return {'status': False, 'errors':errors}
+        new_pw_hash = self.bcrypt.generate_password_hash(new_password)
+        data_reset_password = {
+                            'email': form['login_email'],
+                            'new_pw_hash': new_pw_hash
+                            }
+        query_reset_password = 'UPDATE users SET pw_hash=:new_pw_hash, updated_at=NOW() WHERE email =:email;'
+
+        email_check_query= 'SELECT email FROM users WHERE email=:email;'
+        email_check = self.db.query_db(email_check_query, data_reset_password)
+        print 'email_check', email_check,'\n'
+        if not email_check:
+            errors.append('email does not exist')
+            return {'status': False, 'errors':errors}
+        else:
+            new_password_inserted = self.db.query_db(query_reset_password, data_reset_password)
+            print 'new_password_inserted', new_password_inserted,'\n'
+            return {'status': True}
+
+
+
 
     ################## VIEW USER ##################################
     def view_user(self, user_id):

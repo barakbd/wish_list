@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>items Home</title>
+    <meta charset='UTF-8' />
+    <meta name='description' content='Full app using Pylot MVC' />
+    <meta name='keywords' content='Pylot, forms, database, mySQL, routing' />
+
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel='stylesheet' type='text/css' href="/static/css/items.css" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+    <script type='text/javascript' src="/static/js/script.js"></script>
+
+
+</head>
+
+<body>
+    <div class='container'>
+
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">Welcome {{ session['first_name'] }}</a>
+                </div>
+                <ul class="nav navbar-nav">
+                    <li><a href="/items">Home</a></li>
+                    <li><a href="/items/add_item_page">Add New Item</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href='/clear_session'><span class="glyphicon glyphicon-log-out"></span>Logout</a>></li>
+                </ul>
+            </div>
+        </nav>
+
+
+        <!-- ALL ITEMS -->
+        <div class='container'>
+
+            <h2>{{ users_per_item[0]['item_name'] }}</h2>
+            <h3>
+                Users who have added this item under their wish list:
+            </h3>
+
+            {% for user in users_per_item%}
+            <p>
+                {{ user['first_name'] }}
+            </p>
+            {% endfor%}
+        </div>
+        <!-- END ALL ITEMS CONTAINER -->
+
+</body>
+
+</html>
